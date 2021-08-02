@@ -1,13 +1,13 @@
 from psaw import PushshiftAPI
 import datetime
 import operator
-def wall_street_bettor():
+def wall_street_bettor(day, date, year, limit):
     api = PushshiftAPI()
-    start_time = int(datetime.datetime(2021, 2, 3).timestamp())
+    start_time = int(datetime.datetime(year, month, day).timestamp())
     submissions = api.search_submissions(after=start_time, 
                         subreddit='wallstreetbets',
                         filter = ['url', 'author', 'title', 'subreddit'], 
-                        limit = 15000)
+                        limit = limit)
     stock_tracker = {}
     for submission in submissions:
         words = submission.title.split()
@@ -25,4 +25,4 @@ def wall_street_bettor():
                         stock_tracker[tag] = 1
     stock_tracker = sorted(stock_tracker.items(), key=operator.itemgetter(1), reverse=True)
     return stock_tracker
-print(wall_street_bettor())
+print(wall_street_bettor(2, 3, 2021, 15000))
