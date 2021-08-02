@@ -1,7 +1,7 @@
 from psaw import PushshiftAPI
 import datetime
 import operator
-def wallstreetbettor():
+def wall_street_bettor():
     api = PushshiftAPI()
     start_time = int(datetime.datetime(2021, 2, 3).timestamp())
     submissions = api.search_submissions(after=start_time, 
@@ -25,4 +25,4 @@ def wallstreetbettor():
                         stock_tracker[tag] = 1
     stock_tracker = sorted(stock_tracker.items(), key=operator.itemgetter(1), reverse=True)
     return stock_tracker
-print(wallstreetbettor())
+print(wall_street_bettor())
